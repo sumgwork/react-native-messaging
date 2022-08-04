@@ -37,3 +37,21 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
     MaterialTopTabScreenProps<RootTabParamList, Screen>,
     NativeStackScreenProps<RootStackParamList>
   >;
+
+export type ChatRoom = {
+  chatRoomId: string;
+  users: Array<User>;
+  lastMessage: Message;
+};
+
+export type Message = {
+  id: string;
+  content: string;
+  createdAt: string;
+};
+
+export type User = {
+  id: string;
+  name: string;
+  imageUri: string;
+};
