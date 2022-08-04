@@ -1,27 +1,20 @@
-import { FlatList, StyleSheet } from "react-native";
-import ChatListItem from "../components/ChatListItem";
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { useRoute } from "@react-navigation/native";
 
-import EditScreenInfo from "../components/EditScreenInfo";
-import { Text, View } from "../components/Themed";
-import { chatRooms } from "../data/chats";
-import { RootTabScreenProps } from "../types";
+interface ChatScreenProps {}
 
-export default function ChatScreen({
-  navigation,
-}: RootTabScreenProps<"Chats">) {
+const ChatScreen = (props: ChatScreenProps) => {
+  const { params } = useRoute();
+
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={chatRooms}
-        renderItem={({ item }) => <ChatListItem chatRoom={item} />}
-        keyExtractor={(item) => item.chatRoomId}
-      />
+    <View>
+      <Text>ID: {params?.chatroomId}</Text>
+      <Text>Name: {params?.name}</Text>
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+export default ChatScreen;
+
+const styles = StyleSheet.create({});

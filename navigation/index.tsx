@@ -8,6 +8,8 @@ import {
   Octicons,
   MaterialCommunityIcons,
   Fontisto,
+  MaterialIcons,
+  FontAwesome5,
 } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import {
@@ -22,7 +24,7 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import ChatScreen from "../screens/ChatScreen";
+import ChatListScreen from "../screens/ChatListScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import {
   RootStackParamList,
@@ -30,6 +32,7 @@ import {
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import ChatScreen from "../screens/ChatScreen";
 
 export default function Navigation({
   colorScheme,
@@ -98,6 +101,31 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
+      <Stack.Screen
+        name="ChatScreen"
+        component={ChatScreen}
+        options={({ route }) => ({
+          title: route.params.name,
+          headerBackTitle: "Back",
+          headerRight: () => (
+            <View
+              style={{
+                flexDirection: "row",
+                width: 100,
+                justifyContent: "space-between",
+              }}
+            >
+              <FontAwesome5 name="video" size={20} color="white" />
+              <MaterialIcons name="call" size={20} color="white" />
+              <MaterialCommunityIcons
+                name="dots-vertical"
+                size={20}
+                color="white"
+              />
+            </View>
+          ),
+        })}
+      />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
@@ -133,7 +161,7 @@ function MainTabNavigator() {
     >
       <MainTab.Screen
         name="Camera"
-        component={ChatScreen}
+        component={ChatListScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <Fontisto name="camera" size={20} color={color} />
@@ -143,14 +171,14 @@ function MainTabNavigator() {
       />
       <MainTab.Screen
         name="Chats"
-        component={ChatScreen}
+        component={ChatListScreen}
         options={{
           title: "Chats",
         }}
       />
       <MainTab.Screen
         name="Status"
-        component={ChatScreen}
+        component={ChatListScreen}
         options={{
           title: "Status",
         }}
