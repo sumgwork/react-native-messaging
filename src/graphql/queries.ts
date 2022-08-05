@@ -11,6 +11,7 @@ export const getUser = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -28,6 +29,7 @@ export const listUsers = /* GraphQL */ `
         status
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
