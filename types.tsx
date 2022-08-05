@@ -24,6 +24,7 @@ export type RootStackParamList = {
     chatroomId: string;
     name: string;
   };
+  Contacts: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

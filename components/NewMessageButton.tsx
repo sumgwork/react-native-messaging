@@ -1,17 +1,24 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
+import { useNavigation } from "@react-navigation/native";
 
 const NewMessageButton = () => {
+  const { navigate } = useNavigation();
+
+  const handleNewMessagePress = () => {
+    navigate("Contacts");
+  };
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={handleNewMessagePress}>
       <MaterialCommunityIcons
         name="message-reply-text"
         size={24}
         color="white"
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -33,6 +33,7 @@ import {
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import ChatScreen from "../screens/ChatScreen";
+import Contacts from "../screens/Contacts";
 
 export default function Navigation({
   colorScheme,
@@ -100,6 +101,11 @@ function RootNavigator() {
         name="NotFound"
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
+      />
+      <Stack.Screen
+        name="Contacts"
+        component={Contacts}
+        options={{ title: "Contacts" }}
       />
       <Stack.Screen
         name="ChatScreen"
