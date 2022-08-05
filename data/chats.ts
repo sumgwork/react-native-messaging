@@ -19,6 +19,11 @@ export const chatRooms: Array<ChatRoom> = [
       id: "1",
       content: "Hello",
       createdAt: new Date().toISOString(),
+      user: {
+        id: "2",
+        name: "Jane Doe",
+        imageUri: "https://i.pravatar.cc/300?img=1",
+      },
     },
   },
   {
@@ -39,6 +44,11 @@ export const chatRooms: Array<ChatRoom> = [
       id: "1",
       content: "Are you busy?",
       createdAt: new Date().toISOString(),
+      user: {
+        id: "1",
+        name: "John Doe",
+        imageUri: "https://i.pravatar.cc/300?img=2",
+      },
     },
   },
   {
@@ -59,6 +69,11 @@ export const chatRooms: Array<ChatRoom> = [
       id: "1",
       content: "Hello",
       createdAt: new Date().toISOString(),
+      user: {
+        id: "2",
+        name: "Jane Doe",
+        imageUri: "https://i.pravatar.cc/300?img=3",
+      },
     },
   },
   {
@@ -79,6 +94,11 @@ export const chatRooms: Array<ChatRoom> = [
       id: "1",
       content: "Are you busy? Can we meet at the office?",
       createdAt: new Date().toISOString(),
+      user: {
+        id: "1",
+        name: "John Doe",
+        imageUri: "https://i.pravatar.cc/300?img=4",
+      },
     },
   },
   {
@@ -99,6 +119,11 @@ export const chatRooms: Array<ChatRoom> = [
       id: "1",
       content: "Can you review my pull request please?",
       createdAt: new Date().toISOString(),
+      user: {
+        id: "2",
+        name: "Jane Doe",
+        imageUri: "https://i.pravatar.cc/300?img=5",
+      },
     },
   },
   {
@@ -119,6 +144,11 @@ export const chatRooms: Array<ChatRoom> = [
       id: "1",
       content: "Are you busy?",
       createdAt: new Date().toISOString(),
+      user: {
+        id: "1",
+        name: "John Doe",
+        imageUri: "https://i.pravatar.cc/300?img=6",
+      },
     },
   },
 ];

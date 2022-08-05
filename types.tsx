@@ -48,10 +48,17 @@ export type ChatRoom = {
   lastMessage: Message;
 };
 
+export type ChatRoomData = {
+  chatroomId: string;
+  users: Array<User>;
+  messages: Message[];
+};
+
 export type Message = {
   id: string;
   content: string;
   createdAt: string;
+  user: User;
 };
 
 export type User = {
