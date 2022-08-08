@@ -28,6 +28,9 @@ const ContactListItem = ({ user }: ContactListItemProps) => {
         <Image source={{ uri: user.imageUri }} style={styles.image} />
         <View style={styles.message}>
           <Text style={styles.username}>{user.name}</Text>
+          <Text numberOfLines={1} ellipsizeMode={"tail"} style={styles.status}>
+            {user.status}
+          </Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -56,5 +59,8 @@ const styles = StyleSheet.create({
   },
   username: {
     fontWeight: "bold",
+  },
+  status: {
+    color: "darkgray",
   },
 });
