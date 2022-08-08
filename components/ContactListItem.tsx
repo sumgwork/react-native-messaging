@@ -8,6 +8,12 @@ import {
 import React from "react";
 import { User } from "../types";
 import { useNavigation } from "@react-navigation/native";
+import { API, Auth, graphqlOperation } from "aws-amplify";
+import {
+  createChatRoom,
+  createChatRoomUserRelation,
+} from "../src/graphql/mutations";
+import { ChatRoom } from "../src/API";
 
 interface ContactListItemProps {
   user: User;
@@ -15,7 +21,43 @@ interface ContactListItemProps {
 
 const ContactListItem = ({ user }: ContactListItemProps) => {
   const { navigate } = useNavigation();
-  const handleClick = () => {
+
+  async function createChatRoomForUser() {
+    const chatRoom = await API.graphql(
+      graphqlOperation(createChatRoom, {
+        input: {
+          name: user.name,
+        },
+      })
+    );
+
+    // @ts-ignore
+    const newChatRoomId = chatRoom?.data?.createChatRoom?.id;
+
+    // add id of user in that relation
+    await API.graphql(
+      graphqlOperation(createChatRoomUserRelation, {
+        input: {
+          chatRoomID: newChatRoomId,
+          userID: user.id,
+        },
+      })
+    );
+
+    // add id of logged in user to that relation
+    const currentUser = await Auth.currentAuthenticatedUser();
+    await API.graphql(
+      graphqlOperation(createChatRoomUserRelation, {
+        input: {
+          chatRoomID: newChatRoomId,
+          userID: currentUser.attributes.sub,
+        },
+      })
+    );
+  }
+
+  const handleClick = async () => {
+    await createChatRoomForUser();
     navigate("ChatScreen", {
       chatroomId: user.id,
       name: user.name,
