@@ -1,13 +1,14 @@
 # This "input" configures a global authorization rule to enable public access to
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-input AMPLIFY {
-  globalAuthRule: AuthRule = { allow: public }
-} # FOR TESTING ONLY!
+# input AMPLIFY {
+#   globalAuthRule: AuthRule = { allow: public }
+# }
+# FOR TESTING ONLY!
 type User
   @model
   @auth(
     rules: [
-      { allow: owner, operations: [create, delete, update] }
+      { allow: owner, operations: [create] }
       { allow: private, operations: [read] }
     ]
   )
@@ -16,4 +17,21 @@ type User
   name: String!
   imageUri: String
   status: String
+  chatrooms: [ChatRoom] @manyToMany(relationName: "ChatRoomUserRelation")
+}
+
+type ChatRoom @model @auth(rules: [{ allow: owner }]) @aws_cognito_user_pools {
+  id: ID!
+  name: String!
+  users: [User] @manyToMany(relationName: "ChatRoomUserRelation")
+  messages: [Message] @hasMany
+}
+
+type Message @model @auth(rules: [{ allow: owner }]) @aws_cognito_user_pools {
+  id: ID!
+  content: String!
+  createdByUser: User! @hasOne
+  isDelivered: Boolean! @default(value: "false")
+  isRead: Boolean! @default(value: "false")
+  chatRoom: ChatRoom! @belongsTo
 }
